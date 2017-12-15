@@ -1,0 +1,76 @@
+
+    
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+
+        
+
+            <h1>Dojo Activity Center</h1> 
+            <h4>Welcome @ViewBag.User.FirstName! </h4><form action="Logout" method ="post">
+             <h3><button class="btn-primary">Log Out</button></h3>
+         </form>
+         
+         <table> 
+             <tr>
+                 <th>Activity</th>
+                 <th>Date and Time</th>
+                 <th>Duration</th>
+                 <th>Event Coordinator</th>
+                 <th>Number of Participants</th>
+                 <th>Actions</th>
+             </tr>
+ 
+  
+        @foreach( var x in @ViewBag.Showall)
+        {
+             <tr>
+             <td><a href="showone/@x.ActivityId">@x.Title</a></td>
+             <td>@x.ActivityTime </td>
+             <td>@x.Duration @x.DurationType</td>
+             <td>@x.CreatedByFirstName</td>
+             <td>@x.Participants.Count</td>
+            </tr>
+             var status = false;
+             @if(x.CreatedById==ViewBag.User.UserId)
+             {
+                status = true;
+                <td> <a href="Delete/@x.ActivityId">delete</a></td>                
+            }
+             else
+             {
+                @foreach (var item in x.Participants)
+                {
+                    @if(item.UserId == @ViewBag.User.UserId)
+                    {
+                        status = true;
+                        <td> <a href="Leave/@x.ActivityId">Leave</a></td>
+                        break;
+                     }
+                 }
+             }
+             @if(status==false)
+             {
+                <td> <a href="Participate/@x.ActivityId">Join</a></td>
+             
+             }   
+          
+         }
+         
+     
+     </table>
+     <br>
+     <a href="addactivity">Add New Activity!</a>
+        
+    </body>
+    </html>
+
+    

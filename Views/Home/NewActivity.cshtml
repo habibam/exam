@@ -1,0 +1,39 @@
+@model loginregister.Models.Activity
+
+<form action="/logout" method ="get">
+    <h3><button class="btn-primary">Log Out</button></h3>
+</form>
+
+<form action="/home" method ="get">
+        <h3><button class="btn-primary">Home</button></h3>
+</form>
+
+<form asp-controller="Home" asp-action="CreateActivity" method="post">
+   <br><span asp-validation-for="Title"></span>
+    <label asp-for="Title">Title:</label>
+    <input asp-for="Title" type="text" /><br>
+    <br>
+    
+    <span asp-validation-for="ActivityDate"></span>
+    <label asp-for="ActivityDate">Date:</label>
+    <input asp-for="ActivityDate" type="date"/><br>
+    <br>
+    <span asp-validation-for="ActivityTime"></span>
+    <label asp-for="ActivityTime">Time:</label>
+    <input asp-for="ActivityTime" type="time" /><br>
+    <br>
+    <span asp-validation-for="Duration"></span>
+    <label asp-for="Duration">Duration:</label>
+    <input asp-for="Duration" type="number" />
+    <select name="DurationType">
+        <option value="Days">Days</option>
+        <option value="Hours">Hours</option>
+        <option value="Minutes">Minutes</option>
+    </select><br>
+<br>
+    <span asp-validation-for="Description"></span>
+    <label asp-for="Description">Description:</label>
+    <input asp-for="Description" /><br><br><br>
+
+    <button type="submit">Create Activity</button>
+</form>
